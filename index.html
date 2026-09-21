@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rendering Emulation Gallery</title>
+<meta name="description" content="A gallery demonstrating Chrome DevTools' Rendering tab emulations — CSS media features and vision deficiency simulation — for technical SEO and accessibility education.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <h1>Rendering Emulation Gallery</h1>
+  <p class="lede">A hands-on companion to Chrome DevTools' <strong>Rendering</strong> tab. Open <code>More tools &rarr; Rendering</code>, pick a demo below, and toggle the matching emulation to see the effect live.</p>
+
+  <section class="group">
+    <h2>CSS media features</h2>
+    <p>Real CSS features, emulated via DevTools' <strong>Emulate CSS media feature</strong> dropdowns and detectable in JS via <code>matchMedia</code>. Each page reads and displays your browser's actual live setting.</p>
+    <div class="card-grid">
+      <a class="linkcard" href="media-features/prefers-color-scheme.html">
+        <h3>prefers-color-scheme</h3>
+        <p>Light vs. dark system theme</p>
+      </a>
+      <a class="linkcard" href="media-features/prefers-contrast.html">
+        <h3>prefers-contrast</h3>
+        <p>Requests for more contrast</p>
+      </a>
+      <a class="linkcard" href="media-features/prefers-reduced-motion.html">
+        <h3>prefers-reduced-motion</h3>
+        <p>Requests to minimize animation</p>
+      </a>
+      <a class="linkcard" href="media-features/prefers-reduced-transparency.html">
+        <h3>prefers-reduced-transparency</h3>
+        <p>Requests to minimize transparency &amp; blur</p>
+      </a>
+      <a class="linkcard" href="media-features/forced-colors.html">
+        <h3>forced-colors</h3>
+        <p>OS-level forced color palettes</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="group">
+    <h2>Vision deficiency emulation</h2>
+    <p>DevTools' <strong>Emulate vision deficiencies</strong> dropdown is a display filter applied over the whole rendered page. There is no CSS media feature or JS API for it — these pages can't detect or react to it, so each one shows a bad pattern stacked above a good pattern for a human to compare while toggling the filter.</p>
+    <div class="card-grid">
+      <a class="linkcard" href="vision-deficiencies/color-vision-deficiency.html">
+        <h3>Color vision deficiency</h3>
+        <p>Protanopia, deuteranopia, tritanopia</p>
+      </a>
+      <a class="linkcard" href="vision-deficiencies/achromatopsia.html">
+        <h3>Achromatopsia</h3>
+        <p>Total color blindness (grayscale)</p>
+      </a>
+      <a class="linkcard" href="vision-deficiencies/blurred-vision.html">
+        <h3>Blurred vision</h3>
+        <p>Low visual acuity</p>
+      </a>
+      <a class="linkcard" href="vision-deficiencies/low-contrast-vision.html">
+        <h3>Reduced contrast vision</h3>
+        <p>Low-contrast perception</p>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    Built for technical SEO / frontend accessibility training. No build step, no dependencies — open any file directly, or browse via GitHub Pages.
+  </footer>
+</div>
+</body>
+</html>

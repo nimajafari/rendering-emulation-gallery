@@ -42,6 +42,15 @@ These pages have no live-status banner and no JS detection — there's nothing t
 
 **To test:** open a page, then in DevTools go to `More tools → Rendering → Emulate vision deficiencies`, and pick the matching condition from the dropdown.
 
+### The conditions we simulate
+
+- **[Protanopia](https://en.wikipedia.org/wiki/Protanopia)** — a form of red-green color blindness caused by the absence of red-sensing (L-cone) photoreceptors, making reds appear darker and harder to distinguish from greens and oranges.
+- **[Deuteranopia](https://en.wikipedia.org/wiki/Deuteranopia)** — the most common form of red-green color blindness, caused by the absence of green-sensing (M-cone) photoreceptors, which similarly collapses reds, greens, and browns into overlapping hues.
+- **[Tritanopia](https://en.wikipedia.org/wiki/Tritanopia)** — a rarer blue-yellow color blindness caused by the absence of blue-sensing (S-cone) photoreceptors, making blues and yellows hard to tell apart.
+- **[Achromatopsia](https://en.wikipedia.org/wiki/Achromatopsia)** — total color blindness, where the visitor sees only in shades of gray; any information conveyed by hue alone is lost entirely.
+- **[Blurred vision](https://en.wikipedia.org/wiki/Blurred_vision)** — reduced visual acuity from causes like uncorrected refractive error or cataracts, which can make small text and thin strokes illegible.
+- **[Contrast sensitivity](https://en.wikipedia.org/wiki/Contrast_sensitivity)** loss — a reduced ability to distinguish an object from its background, which low-contrast text and UI fail even faster than normal vision would.
+
 ## Who this is for
 
 Built as teaching material for technical SEO / frontend audits — showing clients, students, or teammates *why* a design decision (color-only status indicators, motion-heavy transitions, low-contrast text) fails a real user, using nothing but Chrome's built-in emulation and no assistive hardware.

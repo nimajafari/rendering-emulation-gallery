@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>prefers-reduced-transparency — Rendering Emulation Gallery</title>
+<meta name="description" content="Live demo of the prefers-reduced-transparency CSS media feature, testable via Chrome DevTools' Rendering tab.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">&larr; Back to gallery</a>
+  <h1>prefers-reduced-transparency</h1>
+  <p class="lede">Detects whether the visitor has asked their system to minimize transparency and blur effects, so a page can swap them for solid backgrounds.</p>
+
+  <div class="banner" id="status">Checking…</div>
+
+  <div class="note">
+    <strong>Try it:</strong> open Chrome DevTools &rarr; <code>More tools</code> &rarr; <code>Rendering</code> &rarr; <code>Emulate CSS media feature prefers-reduced-transparency</code>, then switch between <code>no-preference</code> and <code>reduce</code>. The banner above updates live.
+  </div>
+
+  <div class="note">
+    <strong>Design approach:</strong> treat translucency as an <em>additive</em> enhancement, not a required one. Ship a solid, fully opaque baseline first, then layer in blur/transparency only when the browser reports no preference — that way a missing or unsupported preference never leaves a low-contrast surface behind.
+  </div>
+
+  <div class="colheads">
+    <span>Ignores the preference</span>
+    <span>Respects the preference</span>
+  </div>
+
+  <section class="case">
+    <h2>Frosted-glass panel</h2>
+    <p class="case-note">Both panels render translucent with a backdrop blur by default, letting the striped backdrop bleed through. Only the right panel switches to an opaque, blur-free background under <code>prefers-reduced-transparency: reduce</code>, fully hiding the stripes.</p>
+    <div class="row">
+      <div class="stage tinted-bg-1">
+        <div class="thing a">Overlay content</div>
+      </div>
+      <div class="stage tinted-bg-1">
+        <div class="thing b">Overlay content</div>
+      </div>
+    </div>
+    <pre><code>.thing.a, .thing.b {
+  background: rgba(16, 18, 22, .35);
+  backdrop-filter: blur(10px);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .thing.b {
+    background: #101216;
+    backdrop-filter: none;
+  }
+}</code></pre>
+  </section>
+
+  <section class="case">
+    <h2>Translucent navigation bar</h2>
+    <p class="case-note">Same rule applied to a full-width bar over a checkerboard backdrop, to show the pattern isn't specific to card layouts.</p>
+    <div class="row">
+      <div class="stage tinted-bg-2">
+        <div class="navbar a">Home &nbsp; Products &nbsp; About</div>
+      </div>
+      <div class="stage tinted-bg-2">
+        <div class="navbar b">Home &nbsp; Products &nbsp; About</div>
+      </div>
+    </div>
+    <pre><code>.navbar.a, .navbar.b {
+  background: rgba(16, 18, 22, .5);
+  backdrop-filter: blur(6px);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .navbar.b {
+    background: #16191d;
+    backdrop-filter: none;
+  }
+}</code></pre>
+  </section>
+
+  <section class="case">
+    <h2>Image caption overlay</h2>
+    <p class="case-note">Both captions sit on a faint, translucent band by default, letting the photo show through behind the text. Only the right caption switches to a near-opaque band under <code>prefers-reduced-transparency: reduce</code>, so the text keeps solid contrast regardless of the image underneath.</p>
+    <div class="row">
+      <div class="stage">
+        <div class="photo">
+          <div class="caption a">Sunset over the harbor</div>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="photo">
+          <div class="caption b">Sunset over the harbor</div>
+        </div>
+      </div>
+    </div>
+    <pre><code>.caption.a, .caption.b {
+  background: hsl(0 0% 0% / 20%);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .caption.b {
+    background: hsl(0 0% 0% / 85%);
+  }
+}</code></pre>
+  </section>
+
+  <section class="case">
+    <h2>Modal backdrop scrim</h2>
+    <p class="case-note">Both scrims dim the page behind the dialog only slightly by default. Only the right scrim darkens to near-opaque under the preference, which also makes the dialog itself easier to read at a glance.</p>
+    <div class="row">
+      <div class="stage">
+        <div class="modal-demo">
+          <div class="page-content">
+            <span class="line" style="width:80%;"></span>
+            <span class="line" style="width:55%;"></span>
+            <span class="line" style="width:70%;"></span>
+          </div>
+          <div class="scrim a">
+            <div class="dialog">Save changes?</div>
+          </div>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="modal-demo">
+          <div class="page-content">
+            <span class="line" style="width:80%;"></span>
+            <span class="line" style="width:55%;"></span>
+            <span class="line" style="width:70%;"></span>
+          </div>
+          <div class="scrim b">
+            <div class="dialog">Save changes?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pre><code>.scrim.a, .scrim.b {
+  background: hsl(0 0% 100% / 20%);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .scrim.b {
+    background: hsl(0 0% 0% / 85%);
+  }
+}</code></pre>
+  </section>
+
+  <footer>
+    Browser support: Safari 14+, Chrome/Edge 118+ (Firefox: not yet supported as of this writing — falls back gracefully). Further reading: <a href="https://developer.chrome.com/blog/css-prefers-reduced-transparency">Chrome blog, "CSS prefers-reduced-transparency"</a>.
+  </footer>
+</div>
+
+<style>
+  .tinted-bg-1 {
+    background-image: repeating-linear-gradient(45deg,
+      #e0605b 0 26px,
+      #e0a24b 26px 52px,
+      #5fc9a8 52px 78px,
+      #4b8fe0 78px 104px);
+  }
+
+  .tinted-bg-2 {
+    background-image: repeating-conic-gradient(#4b8fe0 0% 25%, #e0a24b 0% 50%);
+    background-size: 40px 40px;
+  }
+
+  .thing.a, .thing.b {
+    color: var(--text);
+    font-size: 0.9rem;
+    padding: 16px 20px;
+    border-radius: 8px;
+    background: rgba(16, 18, 22, .3);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .thing.b {
+      background: #101216;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  .navbar.a, .navbar.b {
+    width: 100%;
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    padding: 12px 16px;
+    border-radius: 6px;
+    background: rgba(16, 18, 22, .35);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .navbar.b {
+      background: #16191d;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  .photo {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #e0a24b 0%, #e0605b 55%, #16191d 100%);
+  }
+
+  .caption.a, .caption.b {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 14px;
+    color: #fff;
+    font-size: 0.85rem;
+    background: hsl(0 0% 0% / 20%);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .caption.b {
+      background: hsl(0 0% 0% / 85%);
+    }
+  }
+
+  .modal-demo {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--panel-raised);
+  }
+
+  .page-content {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .line {
+    display: block;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--border);
+  }
+
+  .scrim.a, .scrim.b {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(0 0% 100% / 20%);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .scrim.b {
+      background: hsl(0 0% 0% / 85%);
+    }
+  }
+
+  .dialog {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 22px;
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+</style>
+
+<script src="../assets/detect.js"></script>
+<script>
+  initFeatureStatus(
+    document.getElementById('status'),
+    '(prefers-reduced-transparency: reduce)',
+    { on: 'Live: your system asks for REDUCED transparency', off: 'Live: your system allows transparency' },
+    'prefers-reduced-transparency is not supported in this browser.'
+  );
+</script>
+</body>
+</html>
