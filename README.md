@@ -44,10 +44,10 @@ These pages have no live-status banner and no JS detection — there's nothing t
 
 ### The conditions we simulate
 
-- **[Protanopia](https://en.wikipedia.org/wiki/Protanopia)** — a form of red-green color blindness caused by the absence of red-sensing (L-cone) photoreceptors, making reds appear darker and harder to distinguish from greens and oranges.
-- **[Deuteranopia](https://en.wikipedia.org/wiki/Deuteranopia)** — the most common form of red-green color blindness, caused by the absence of green-sensing (M-cone) photoreceptors, which similarly collapses reds, greens, and browns into overlapping hues.
-- **[Tritanopia](https://en.wikipedia.org/wiki/Tritanopia)** — a rarer blue-yellow color blindness caused by the absence of blue-sensing (S-cone) photoreceptors, making blues and yellows hard to tell apart.
-- **[Achromatopsia](https://en.wikipedia.org/wiki/Achromatopsia)** — total color blindness, where the visitor sees only in shades of gray; any information conveyed by hue alone is lost entirely.
+- **[Protanopia (no red)](https://en.wikipedia.org/wiki/Protanopia)** — a form of red-green color blindness caused by the absence of red-sensing (L-cone) photoreceptors, making reds appear darker and harder to distinguish from greens and oranges.
+- **[Deuteranopia (no green)](https://en.wikipedia.org/wiki/Deuteranopia)** — the most common form of red-green color blindness, caused by the absence of green-sensing (M-cone) photoreceptors, which similarly collapses reds, greens, and browns into overlapping hues.
+- **[Tritanopia (no blue)](https://en.wikipedia.org/wiki/Tritanopia)** — a rarer blue-yellow color blindness caused by the absence of blue-sensing (S-cone) photoreceptors, making blues and yellows hard to tell apart.
+- **[Achromatopsia (no color)](https://en.wikipedia.org/wiki/Achromatopsia)** — total color blindness, where the visitor sees only in shades of gray; any information conveyed by hue alone is lost entirely.
 - **[Blurred vision](https://en.wikipedia.org/wiki/Blurred_vision)** — reduced visual acuity from causes like uncorrected refractive error or cataracts, which can make small text and thin strokes illegible.
 - **[Contrast sensitivity](https://en.wikipedia.org/wiki/Contrast_sensitivity)** loss — a reduced ability to distinguish an object from its background, which low-contrast text and UI fail even faster than normal vision would.
 
