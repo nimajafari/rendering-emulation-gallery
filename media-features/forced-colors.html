@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>forced-colors — Rendering Emulation Gallery</title>
+<meta name="description" content="Live demo of the forced-colors CSS media feature, testable via Chrome DevTools' Rendering tab.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">&larr; Back to gallery</a>
+  <h1>forced-colors</h1>
+  <p class="lede">Detects when the browser is overriding author colors with a user- or OS-defined limited palette (e.g. Windows High Contrast Mode), so a page can add back structure that color alone used to provide.</p>
+
+  <div class="banner" id="status">Checking…</div>
+
+  <div class="note">
+    <strong>Try it:</strong> open Chrome DevTools &rarr; <code>More tools</code> &rarr; <code>Rendering</code> &rarr; <code>Emulate CSS media feature forced-colors</code>, then switch between <code>none</code> and <code>active</code>. The banner above updates live — and DevTools will also repaint colors using the system's forced palette.
+  </div>
+
+  <div class="colheads">
+    <span>Ignores the preference</span>
+    <span>Respects the preference</span>
+  </div>
+
+  <section class="case">
+    <h2>Borderless status pill</h2>
+    <p class="case-note">Both pills rely on background color alone by default. In forced-colors mode, backgrounds are flattened by the browser — only the right pill adds an explicit border so it stays visible as a distinct shape.</p>
+    <div class="row">
+      <div class="stage">
+        <span class="chip a">Active</span>
+      </div>
+      <div class="stage">
+        <span class="chip b">Active</span>
+      </div>
+    </div>
+    <pre><code>.chip.a, .chip.b {
+  background: #5fc9a8;
+  color: #0e1013;
+  border: 1px solid transparent;
+}
+
+@media (forced-colors: active) {
+  .chip.b {
+    border: 1px solid CanvasText;
+  }
+}</code></pre>
+  </section>
+
+  <section class="case">
+    <h2>Focus ring on a custom control</h2>
+    <p class="case-note">Custom outlines are also stripped by forced-colors. The right control explicitly re-declares its outline using the <code>Highlight</code> system color so keyboard focus stays visible.</p>
+    <div class="row">
+      <div class="stage">
+        <button class="ctrl a" type="button">Custom control</button>
+      </div>
+      <div class="stage">
+        <button class="ctrl b" type="button">Custom control</button>
+      </div>
+    </div>
+    <pre><code>.ctrl.a, .ctrl.b {
+  outline: none;
+  box-shadow: 0 0 0 2px #5fc9a8;
+}
+
+@media (forced-colors: active) {
+  .ctrl.b {
+    outline: 2px solid Highlight;
+    box-shadow: none;
+  }
+}</code></pre>
+  </section>
+
+  <footer>
+    Browser support: Chrome/Edge 89+, Firefox 113+, Safari 17.4+ (values: <code>none</code>, <code>active</code>).
+  </footer>
+</div>
+
+<style>
+  .chip.a, .chip.b {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    background: var(--ok);
+    color: #0e1013;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 6px 16px;
+  }
+
+  @media (forced-colors: active) {
+    .chip.b {
+      border: 1px solid CanvasText;
+    }
+  }
+
+  .ctrl.a, .ctrl.b {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    background: var(--panel-raised);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 20px;
+    outline: none;
+    box-shadow: 0 0 0 2px var(--ok);
+  }
+
+  @media (forced-colors: active) {
+    .ctrl.b {
+      outline: 2px solid Highlight;
+      box-shadow: none;
+    }
+  }
+</style>
+
+<script src="../assets/detect.js"></script>
+<script>
+  initFeatureStatus(
+    document.getElementById('status'),
+    '(forced-colors: active)',
+    { on: 'Live: forced-colors is ACTIVE', off: 'Live: forced-colors is not active' },
+    'forced-colors is not supported in this browser.'
+  );
+</script>
+</body>
+</html>

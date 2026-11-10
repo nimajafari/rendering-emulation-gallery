@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>prefers-color-scheme — Rendering Emulation Gallery</title>
+<meta name="description" content="Live demo of the prefers-color-scheme CSS media feature, testable via Chrome DevTools' Rendering tab.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">&larr; Back to gallery</a>
+  <h1>prefers-color-scheme</h1>
+  <p class="lede">Detects whether the visitor's system is set to a light or dark color scheme, so a page can adapt its palette automatically.</p>
+
+  <div class="banner" id="status">Checking…</div>
+
+  <div class="note">
+    <strong>Try it:</strong> open Chrome DevTools &rarr; <code>More tools</code> &rarr; <code>Rendering</code> &rarr; <code>Emulate CSS media feature prefers-color-scheme</code>, then switch between <code>light</code> and <code>dark</code>. The banner above updates live.
+  </div>
+
+  <div class="colheads">
+    <span>Ignores the preference</span>
+    <span>Respects the preference</span>
+  </div>
+
+  <section class="case">
+    <h2>Card background &amp; text</h2>
+    <p class="case-note">Both cards render identically with no preference set. Only the right card switches to a dark palette under <code>prefers-color-scheme: dark</code>.</p>
+    <div class="row">
+      <div class="stage" id="card-a-stage">
+        <div class="card a">Card content stays light regardless of system setting.</div>
+      </div>
+      <div class="stage" id="card-b-stage">
+        <div class="card b">Card content follows your system's color scheme.</div>
+      </div>
+    </div>
+    <pre><code>.card.a, .card.b {
+  background: #f4f4f5;
+  color: #16181c;
+  border: 1px solid #d8d8dc;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card.b {
+    background: #1c1e22;
+    color: #eef0f2;
+    border-color: #33373d;
+  }
+}</code></pre>
+  </section>
+
+  <section class="case">
+    <h2>Icon tone</h2>
+    <p class="case-note">Same rule applies to a simple UI element — a status swatch — so you can see the pattern holds beyond text and backgrounds.</p>
+    <div class="row">
+      <div class="stage">
+        <div class="swatch a"></div>
+      </div>
+      <div class="stage">
+        <div class="swatch b"></div>
+      </div>
+    </div>
+    <pre><code>.swatch.a, .swatch.b {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  background: #f4f4f5;
+  border: 1px solid #d8d8dc;
+}
+
+@media (prefers-color-scheme: dark) {
+  .swatch.b {
+    background: #1c1e22;
+    border-color: #33373d;
+  }
+}</code></pre>
+  </section>
+
+  <footer>
+    Browser support: all evergreen browsers (Chrome 76+, Firefox 67+, Safari 12.1+, Edge 79+).
+  </footer>
+</div>
+
+<style>
+  .card.a, .card.b {
+    background: #f4f4f5;
+    color: #16181c;
+    border: 1px solid #d8d8dc;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .card.b {
+      background: #1c1e22;
+      color: #eef0f2;
+      border-color: #33373d;
+    }
+  }
+
+  .swatch.a, .swatch.b {
+    width: 64px;
+    height: 64px;
+    border-radius: 10px;
+    background: #f4f4f5;
+    border: 1px solid #d8d8dc;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .swatch.b {
+      background: #1c1e22;
+      border-color: #33373d;
+    }
+  }
+</style>
+
+<script src="../assets/detect.js"></script>
+<script>
+  initFeatureStatus(
+    document.getElementById('status'),
+    '(prefers-color-scheme: dark)',
+    { on: 'Live: your system is set to DARK', off: 'Live: your system is set to LIGHT' },
+    'prefers-color-scheme is not supported in this browser.'
+  );
+</script>
+</body>
+</html>

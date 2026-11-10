@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>prefers-reduced-motion — Rendering Emulation Gallery</title>
+<meta name="description" content="Live demo of the prefers-reduced-motion CSS media feature, testable via Chrome DevTools' Rendering tab.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">&larr; Back to gallery</a>
+  <h1>prefers-reduced-motion</h1>
+  <p class="lede">Detects whether the visitor has asked their system to minimize non-essential animation, so a page can cut or simplify motion for them.</p>
+
+  <div class="banner" id="status">Checking…</div>
+
+  <div class="note">
+    <strong>Try it:</strong> open Chrome DevTools &rarr; <code>More tools</code> &rarr; <code>Rendering</code> &rarr; <code>Emulate CSS media feature prefers-reduced-motion</code>, then switch between <code>no-preference</code> and <code>reduce</code>. The banner above updates live.
+  </div>
+
+  <div class="colheads">
+    <span>Ignores the preference</span>
+    <span>Respects the preference</span>
+  </div>
+
+  <section class="case">
+    <h2>Looping attention animation</h2>
+    <p class="case-note">Both boxes pulse by default. Only the right box's animation is disabled under <code>prefers-reduced-motion: reduce</code>.</p>
+    <div class="row">
+      <div class="stage">
+        <div class="pulse a"></div>
+      </div>
+      <div class="stage">
+        <div class="pulse b"></div>
+      </div>
+    </div>
+    <pre><code>.pulse.a, .pulse.b {
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse.b {
+    animation: none;
+  }
+}</code></pre>
+  </section>
+
+  <section class="case">
+    <h2>Slide-in entrance transition</h2>
+    <p class="case-note">Same idea for a transform-based entrance animation — reduced to an instant, non-animated appearance when respected.</p>
+    <div class="row">
+      <div class="stage">
+        <div class="slide a">Slides in</div>
+      </div>
+      <div class="stage">
+        <div class="slide b">Slides in</div>
+      </div>
+    </div>
+    <pre><code>.slide.a, .slide.b {
+  animation: slide-in 0.8s ease-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide.b {
+    animation: none;
+  }
+}</code></pre>
+  </section>
+
+  <footer>
+    Browser support: all evergreen browsers (Chrome 74+, Firefox 63+, Safari 10.1+, Edge 79+).
+  </footer>
+</div>
+
+<style>
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.7; }
+  }
+
+  .pulse.a, .pulse.b {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--warn);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pulse.b {
+      animation: none;
+    }
+  }
+
+  @keyframes slide-in {
+    from { transform: translateX(-16px); }
+    to { transform: translateX(16px); }
+  }
+
+  .slide.a, .slide.b {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    background: var(--panel-raised);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 16px;
+    animation: slide-in 0.8s ease-out infinite alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide.b {
+      animation: none;
+    }
+  }
+</style>
+
+<script src="../assets/detect.js"></script>
+<script>
+  initFeatureStatus(
+    document.getElementById('status'),
+    '(prefers-reduced-motion: reduce)',
+    { on: 'Live: your system asks for REDUCED motion', off: 'Live: your system allows full motion' },
+    'prefers-reduced-motion is not supported in this browser.'
+  );
+</script>
+</body>
+</html>

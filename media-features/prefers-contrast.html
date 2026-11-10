@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>prefers-contrast — Rendering Emulation Gallery</title>
+<meta name="description" content="Live demo of the prefers-contrast CSS media feature, testable via Chrome DevTools' Rendering tab.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">&larr; Back to gallery</a>
+  <h1>prefers-contrast</h1>
+  <p class="lede">Detects whether the visitor has asked their system for more or less contrast than the default, so a page can strengthen borders and text contrast for them.</p>
+
+  <div class="banner" id="status">Checking…</div>
+
+  <div class="note">
+    <strong>Try it:</strong> open Chrome DevTools &rarr; <code>More tools</code> &rarr; <code>Rendering</code> &rarr; <code>Emulate CSS media feature prefers-contrast</code>, then switch between <code>no-preference</code> and <code>more</code>. The banner above updates live.
+  </div>
+
+  <div class="colheads">
+    <span>Ignores the preference</span>
+    <span>Respects the preference</span>
+  </div>
+
+  <section class="case">
+    <h2>Body text &amp; border weight</h2>
+    <p class="case-note">Both panels use the same muted text and hairline border by default. Only the right panel strengthens both under <code>prefers-contrast: more</code>.</p>
+    <div class="row">
+      <div class="stage">
+        <div class="panel a">
+          <p>Body copy at standard contrast.</p>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="panel b">
+          <p>Body copy at standard contrast.</p>
+        </div>
+      </div>
+    </div>
+    <pre><code>.panel.a, .panel.b {
+  color: #9aa2ab;
+  border: 1px solid #262b31;
+}
+
+@media (prefers-contrast: more) {
+  .panel.b {
+    color: #eef0f2;
+    border: 2px solid #eef0f2;
+  }
+}</code></pre>
+  </section>
+
+  <section class="case">
+    <h2>Button outline</h2>
+    <p class="case-note">Same pattern applied to an interactive control — a thin, low-contrast outline by default, thickened and darkened on request.</p>
+    <div class="row">
+      <div class="stage">
+        <button class="btn a" type="button">Continue</button>
+      </div>
+      <div class="stage">
+        <button class="btn b" type="button">Continue</button>
+      </div>
+    </div>
+    <pre><code>.btn.a, .btn.b {
+  border: 1px solid #454b53;
+}
+
+@media (prefers-contrast: more) {
+  .btn.b {
+    border: 2px solid #eef0f2;
+    font-weight: 600;
+  }
+}</code></pre>
+  </section>
+
+  <footer>
+    Browser support: Chrome/Edge 96+, Firefox 101+, Safari 14.1+ (values: <code>no-preference</code>, <code>more</code>, <code>less</code>, <code>custom</code>).
+  </footer>
+</div>
+
+<style>
+  .panel.a, .panel.b {
+    color: #9aa2ab;
+    border: 1px solid #262b31;
+    border-radius: 6px;
+    padding: 14px 16px;
+    width: 100%;
+  }
+
+  .panel.a p, .panel.b p {
+    margin: 0;
+  }
+
+  @media (prefers-contrast: more) {
+    .panel.b {
+      color: #eef0f2;
+      border: 2px solid #eef0f2;
+    }
+  }
+
+  .btn.a, .btn.b {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    background: var(--panel-raised);
+    color: var(--text);
+    border: 1px solid #454b53;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: default;
+  }
+
+  @media (prefers-contrast: more) {
+    .btn.b {
+      border: 2px solid #eef0f2;
+      font-weight: 600;
+    }
+  }
+</style>
+
+<script src="../assets/detect.js"></script>
+<script>
+  initFeatureStatus(
+    document.getElementById('status'),
+    '(prefers-contrast: more)',
+    { on: 'Live: your system asks for MORE contrast', off: 'Live: your system uses standard contrast' },
+    'prefers-contrast is not supported in this browser.'
+  );
+</script>
+</body>
+</html>
