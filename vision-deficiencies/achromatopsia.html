@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achromatopsia — Rendering Emulation Gallery</title>
+<meta name="description" content="Compare a hue-only chart legend against a pattern-and-brightness legend under Chrome DevTools' achromatopsia emulation.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">&larr; Back to gallery</a>
+  <h1>Achromatopsia</h1>
+  <p class="lede">Total color blindness — the visitor sees only in shades of gray. There is no CSS media feature or JS API for this; it's a display filter DevTools applies over the whole page, so compare the two patterns below by eye while toggling it.</p>
+
+  <div class="note">
+    <strong>Try it:</strong> open Chrome DevTools &rarr; <code>More tools</code> &rarr; <code>Rendering</code> &rarr; <code>Emulate vision deficiencies</code> &rarr; <code>Achromatopsia</code>.
+  </div>
+
+  <section class="case">
+    <h2>Bad: legend relies on hue only</h2>
+    <p class="case-note">Three bars distinguished only by hue at the same lightness. Under achromatopsia they collapse into a single shade of gray.</p>
+    <div class="stage">
+      <div class="chart-row">
+        <div class="bar" style="height:70%; background:#e0605b;"></div>
+        <div class="bar" style="height:90%; background:#5fc9a8;"></div>
+        <div class="bar" style="height:55%; background:#4b8fe0;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case">
+    <h2>Good: pattern, brightness, and labels</h2>
+    <p class="case-note">Same three series, now differentiated by fill pattern and direct labeling, plus enough lightness contrast to read even in grayscale.</p>
+    <div class="stage">
+      <div class="chart-row">
+        <div class="bar labeled" style="height:70%; background:#e0605b; background-image:repeating-linear-gradient(45deg, rgba(0,0,0,.25) 0 4px, transparent 4px 8px);">
+          <span class="bar-label">Q1</span>
+        </div>
+        <div class="bar labeled" style="height:90%; background:#5fc9a8;">
+          <span class="bar-label">Q2</span>
+        </div>
+        <div class="bar labeled" style="height:55%; background:#4b8fe0; background-image:repeating-linear-gradient(90deg, rgba(0,0,0,.25) 0 3px, transparent 3px 7px);">
+          <span class="bar-label">Q3</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    DevTools note: this filter renders on top of the page — it cannot be detected or reacted to with CSS or JavaScript. The only real fix is designing so hue is never the sole signal.
+  </footer>
+</div>
+
+<style>
+  .chart-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    height: 160px;
+  }
+
+  .bar {
+    width: 56px;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+  }
+
+  .bar.labeled {
+    display: flex;
+    justify-content: center;
+  }
+
+  .bar-label {
+    position: absolute;
+    bottom: -26px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+</style>
+</body>
+</html>

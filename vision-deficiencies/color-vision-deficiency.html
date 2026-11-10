@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color vision deficiency — Rendering Emulation Gallery</title>
+<meta name="description" content="Compare a color-only design against a shape-and-label design under Chrome DevTools' protanopia, deuteranopia, and tritanopia emulation.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">&larr; Back to gallery</a>
+  <h1>Color vision deficiency</h1>
+  <p class="lede">Covers protanopia (red-weak), deuteranopia (green-weak), and tritanopia (blue-weak) — the three most common forms of color blindness. There is no CSS media feature or JS API for this; it's a display filter DevTools applies over the whole page, so compare the two patterns below by eye while toggling it.</p>
+
+  <div class="note">
+    <strong>Try it:</strong> open Chrome DevTools &rarr; <code>More tools</code> &rarr; <code>Rendering</code> &rarr; <code>Emulate vision deficiencies</code>, then pick <code>Protanopia</code>, <code>Deuteranopia</code>, or <code>Tritanopia</code>. Watch what happens to each pattern below.
+  </div>
+
+  <section class="case">
+    <h2>Bad: color is the only signal</h2>
+    <p class="case-note">Status is conveyed purely by red vs. green hue. Under any red-green color deficiency, these become nearly indistinguishable.</p>
+    <div class="stage">
+      <div class="demo-row">
+        <span class="dotonly" style="background:#e0605b;"></span>
+        <span class="dotonly" style="background:#5fc9a8;"></span>
+        <span class="dotonly" style="background:#e0605b;"></span>
+        <span class="dotonly" style="background:#5fc9a8;"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="case">
+    <h2>Good: color plus shape and label</h2>
+    <p class="case-note">The same statuses now carry an icon shape and a text label, so meaning survives even when the color channel is unreliable.</p>
+    <div class="stage">
+      <div class="demo-row">
+        <span class="pill"><span class="dot" style="background:#e0605b;"></span>&#10005; Failed</span>
+        <span class="pill"><span class="dot" style="background:#5fc9a8;"></span>&#10003; Passed</span>
+        <span class="pill"><span class="dot" style="background:#e0605b;"></span>&#10005; Failed</span>
+        <span class="pill"><span class="dot" style="background:#5fc9a8;"></span>&#10003; Passed</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    DevTools note: this filter renders on top of the page — it cannot be detected or reacted to with CSS or JavaScript. The only real fix is designing so color is never the sole signal.
+  </footer>
+</div>
+
+<style>
+  .demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+</body>
+</html>

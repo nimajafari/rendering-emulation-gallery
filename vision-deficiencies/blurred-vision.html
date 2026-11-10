@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blurred vision — Rendering Emulation Gallery</title>
+<meta name="description" content="Compare small, thin-stroke UI against large, high-weight UI under Chrome DevTools' blurred vision emulation.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">&larr; Back to gallery</a>
+  <h1>Blurred vision</h1>
+  <p class="lede">Simulates low visual acuity — uncorrected refractive error, cataracts, or general low vision. There is no CSS media feature or JS API for this; it's a display filter DevTools applies over the whole page, so compare the two patterns below by eye while toggling it.</p>
+
+  <div class="note">
+    <strong>Try it:</strong> open Chrome DevTools &rarr; <code>More tools</code> &rarr; <code>Rendering</code> &rarr; <code>Emulate vision deficiencies</code> &rarr; <code>Blurred vision</code>.
+  </div>
+
+  <section class="case">
+    <h2>Bad: small text, thin strokes</h2>
+    <p class="case-note">Fine print and hairline icon strokes that are already near the limit of legibility — blurring pushes them past it.</p>
+    <div class="stage">
+      <div class="small-ui">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 8v4l3 2"></path>
+        </svg>
+        <p class="tiny">Delivery estimate: 3&ndash;5 business days from ship date, excluding weekends and public holidays.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="case">
+    <h2>Good: larger text, heavier strokes, more spacing</h2>
+    <p class="case-note">Same content, set at a larger size with a heavier icon stroke and generous line spacing — still readable when blurred.</p>
+    <div class="stage">
+      <div class="large-ui">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 8v4l3 2"></path>
+        </svg>
+        <p class="clear">Delivery in 3&ndash;5 business days.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    DevTools note: this filter renders on top of the page — it cannot be detected or reacted to with CSS or JavaScript. The only real fix is sizing text and strokes generously by default.
+  </footer>
+</div>
+
+<style>
+  .small-ui, .large-ui {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 480px;
+  }
+
+  .tiny {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .clear {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+  }
+</style>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reduced contrast vision — Rendering Emulation Gallery</title>
+<meta name="description" content="Compare low-contrast text against WCAG-compliant contrast text under Chrome DevTools' reduced contrast emulation.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">&larr; Back to gallery</a>
+  <h1>Reduced contrast vision</h1>
+  <p class="lede">Simulates low-contrast perception, common with cataracts and other vision conditions. There is no CSS media feature or JS API for this; it's a display filter DevTools applies over the whole page, so compare the two patterns below by eye while toggling it.</p>
+
+  <div class="note">
+    <strong>Try it:</strong> open Chrome DevTools &rarr; <code>More tools</code> &rarr; <code>Rendering</code> &rarr; <code>Emulate vision deficiencies</code> &rarr; <code>Reduced contrast</code>.
+  </div>
+
+  <section class="case">
+    <h2>Bad: text fails WCAG contrast</h2>
+    <p class="case-note">Muted-gray-on-dark body text at roughly 2.3:1 &mdash; already below the WCAG AA minimum of 4.5:1 for body text, so the reduced-contrast filter makes it nearly unreadable.</p>
+    <div class="stage">
+      <p class="low-contrast">This paragraph uses #55595f on #16191d, well under the WCAG AA threshold for normal text.</p>
+    </div>
+  </section>
+
+  <section class="case">
+    <h2>Good: text meets WCAG AA contrast</h2>
+    <p class="case-note">Same layout, with body text at roughly 12:1 against the panel background &mdash; comfortably above the 4.5:1 minimum, so it stays legible under the filter.</p>
+    <div class="stage">
+      <p class="high-contrast">This paragraph uses #eef0f2 on #16191d, comfortably above the WCAG AA threshold for normal text.</p>
+    </div>
+  </section>
+
+  <footer>
+    DevTools note: this filter renders on top of the page — it cannot be detected or reacted to with CSS or JavaScript. The only real fix is meeting WCAG AA contrast ratios (4.5:1 for body text, 3:1 for large text) by default.
+  </footer>
+</div>
+
+<style>
+  .low-contrast {
+    color: #55595f;
+    max-width: 52ch;
+    margin: 0;
+  }
+
+  .high-contrast {
+    color: #eef0f2;
+    max-width: 52ch;
+    margin: 0;
+  }
+</style>
+</body>
+</html>
